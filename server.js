@@ -1,12 +1,15 @@
 const express = require('express');
 const helmet = require("helmet");
-
-const db = require('./src/models')
+const cors = require('cors')
+// const db = require('./src/models')
 const {router } = require('./src/api')
 
 const app = express();
 
+app.use(express.json())
 app.use(helmet())
+app.use(cors())
+
 app.use('/api/v1', router)
 
 

@@ -2,7 +2,7 @@ const express = require('express')
 // const mongoose = require('mongoose')
 const bcrypt = require('bcrypt')
 const { User} = require('../models')
-const { hashPassword } = require('../utils/auth')
+const { hashPassword ,generateToken } = require('../utils/auth')
 const userRoute = express.Router()
 
 userRoute.route('/login')
@@ -25,7 +25,7 @@ userRoute.route('/login')
         token
       }
 
-      res.send(payload)
+      res.send(payload).status(200)
     } catch (err) {
       console.error(err)
     }
@@ -59,7 +59,7 @@ userRoute.route('/register')
         //   email
         // }
         // await sendEmail(payload)
-        res.send(201, { username, email })
+        res.send({ username, email }).status(201)
       } else {
         res.send('Invalid credentials').status(400)
       }
