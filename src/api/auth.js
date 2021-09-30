@@ -3,9 +3,9 @@ const express = require('express')
 const bcrypt = require('bcrypt')
 const { User} = require('../models')
 const { hashPassword ,generateToken } = require('../utils/auth')
-const userRoute = express.Router()
+const authRoute = express.Router()
 
-userRoute.route('/login')
+authRoute.route('/login')
   .post(async (req, res) => {
     try {
       const { email, password } = req.body
@@ -19,19 +19,20 @@ userRoute.route('/login')
       const token = generateToken(user._id)
 
       let payload = {
-        id: user._id,
-        username: user.username,
-        email: user.email,
+        // id: user._id,
+        // username: user.username,
+        // email: user.email,
         token
       }
-
+      // res.redirect(302,'/')
       res.send(payload).status(200)
+     
     } catch (err) {
       console.error(err)
     }
   })
 
-userRoute.route('/register')
+authRoute.route('/register')
   .post(async (req, res) => {
     const { username, email, password } = req.body
     console.log(req.body)
@@ -59,7 +60,7 @@ userRoute.route('/register')
         //   email
         // }
         // await sendEmail(payload)
-        res.send({ username, email }).status(201)
+        res.send(`${username} Registered Successfully`).status(201)
       } else {
         res.send('Invalid credentials').status(400)
       }
@@ -69,6 +70,10 @@ userRoute.route('/register')
     }
   })
 
+  authRoute.route('/logout')
+    .post(async(req,res) =>{
+      console.log('check for logout')
+    })
 // userRoute.route('/verify')
 //   .post(async (req, res) => {
 //     const { email, code } = req.body
@@ -92,4 +97,4 @@ userRoute.route('/register')
 
 // userRoute.route('/logout')
 
-module.exports =  { userRoute }
+module.exports =  { authRoute }
