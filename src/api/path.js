@@ -19,4 +19,14 @@ pathRouter.route('/')
         }
     })
 
+pathRouter.route('/:pathId/modules')
+    .post(async(req,res) =>{
+
+    })
+
+
+pathRouter.route('/:pathId/modules/:moduleId/secion')
+    .post( async (req,res) => {
+
+    })
 module.exports ={ pathRouter }
