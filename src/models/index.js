@@ -5,7 +5,6 @@ const mongoose = require('mongoose');
 // const pathSchema = require('./path')
 
 
-// mongoConn =connection().catch(err => console.log(err));
 
 // async function connection() {
 const mongoConn =   mongoose.createConnection('mongodb://localhost:27017/test')
