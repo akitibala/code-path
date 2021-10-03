@@ -12,6 +12,7 @@ pathRouter.route('/')
             })
             const pathRes = await path.save()
             console.log(pathRes);
+            res.send(pathRes).status(201)
         }
         catch(err){
             console.error(err)
@@ -30,8 +31,10 @@ pathRouter.route('/:pathId/modules')
         })
         const moduleRes = await module.save()
         const doc = await Path.findOne({id:pathId})
-        doc.modules.push(moduleRes) 
+        doc.modules.push(moduleRes)
+        await doc.save()
         console.log(moduleRes);
+        res.send(doc).status(201)
     }
     catch(err){
         console.log(err)
@@ -40,7 +43,7 @@ pathRouter.route('/:pathId/modules')
     })
 
 
-pathRouter.route('/:pathId/modules/:moduleId/section')
+pathRouter.route('/:pathId/modules/:moduleId/sections')
     .post( async (req,res) => {
         const  { pathId } = req.params
         const { moduleId } = req.params
@@ -52,11 +55,16 @@ pathRouter.route('/:pathId/modules/:moduleId/section')
             })
             const sectionRes = await section.save()
             const doc = await Path.findOne({id:pathId})
-            const module = doc.modules.id(moduleId)
-            module.push(section)
-
-            doc.modules.push(module) 
+            // const module = doc.modules.id(moduleId)
+            // console.log(module)
+            // module.push(section)
+            const index =doc.modules.findIndex( module => module.id === moduleId)
+            console.log(index)
+            doc.modules[index].sections.push(section) 
+            await  doc.save()
             console.log(doc);
+            res.send(doc).status(201)
+
         }
         catch(err){
             console.log(err)
