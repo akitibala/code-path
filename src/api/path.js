@@ -1,6 +1,7 @@
 const express = require('express')
 const { Path ,Module,Section} = require('../models')
 const pathRouter = express.Router()
+const pathAuthRouter = express.Router()
 
 pathRouter.route('/')
     .post(async (req,res) => {
@@ -18,6 +19,11 @@ pathRouter.route('/')
             console.error(err)
             res.send(400)
         }
+    })
+pathAuthRouter.route('/')
+    .get( async(req,res) =>{
+        const allPaths = await Path.find()
+        res.send(allPaths).status(200)
     })
 
 pathRouter.route('/:pathId/modules')

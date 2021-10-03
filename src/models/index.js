@@ -8,7 +8,7 @@ const mongoose = require('mongoose');
 // mongoConn =connection().catch(err => console.log(err));
 
 // async function connection() {
-const mongoConn =   mongoose.createConnection('mongodb://localhost:27017/test');
+const mongoConn =   mongoose.createConnection('mongodb://localhost:27017/test')
 //  return conn
 
 // }
