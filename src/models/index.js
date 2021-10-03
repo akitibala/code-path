@@ -24,14 +24,23 @@ const sectionSchema = new mongoose.Schema({
     },
     isSectionCompleted:{
         type:Boolean,
+        default:false
         
     }
     })
 
 const moduleSchema = new mongoose.Schema({
-        module:[sectionSchema],
+  title:{
+    type:String,
+    required:true
+},
+description:{
+    type:String,
+},
+        sections:[sectionSchema],
         isModuleCompleted:{
-            type:Boolean
+            type:Boolean,
+            default:false
         }
         })
         
