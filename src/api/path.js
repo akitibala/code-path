@@ -1,7 +1,7 @@
 const express = require('express')
 const { Path ,Module,Section} = require('../models')
 const pathRouter = express.Router()
-const pathAuthRouter = express.Router()/
+// const pathAuthRouter = express.Router()
 
 pathRouter.route('/')
     .post(async (req,res) => {
